@@ -6,7 +6,7 @@ bootcfg(
     sense = board.GP6,
     source= board.GP21,
     # optional:,
-    cdc=True,
+    cdc_console=True,
     consumer_control=True,
     keyboard=True,
     midi=False,
