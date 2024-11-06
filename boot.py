@@ -14,5 +14,5 @@ bootcfg(
     nkro=False,
     pan=False,
     storage=False,
-    usb_id=('KMK Keyboard',),
+    usb_id=('KMK Keyboard','PICO Macropad'),
 )

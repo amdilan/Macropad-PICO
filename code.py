@@ -9,11 +9,13 @@ from kmk.extensions.media_keys import MediaKeys
 from kmk.modules.layers import Layers
 from kmk.modules.macros import Macros, Press, Release, Tap
 from kmk.modules.tapdance import TapDance
+from kmk.modules.holdtap import HoldTap
 
 PICO = KMKKeyboard()
 encoder_handler = EncoderHandler()
 layers = Layers()
 macros = Macros()
+holdtap = HoldTap()
 
 tapdance = TapDance()
 # tapdance.tap_time = 750
@@ -23,6 +25,7 @@ PICO.extensions.append(MediaKeys())
 PICO.modules.append(encoder_handler)
 PICO.modules.append(layers)
 PICO.modules.append(macros)
+PICO.modules.append(holdtap)
 
 encoder_handler.pins = (
     (board.GP2, board.GP3, None, True,), #Encoder 1
@@ -53,28 +56,28 @@ TSKMGR = KC.MACRO(
 SS = KC.MACRO(
     Tap(WIN(KC.PSCREEN))
 )
-ALT_LEFT = KC.MACRO(
+ALT_L = KC.MACRO(
     Tap(KC.RALT(KC.LEFT))
 )
-ALT_UP = KC.MACRO(
+ALT_U = KC.MACRO(
     Tap(KC.RALT(KC.UP))
 )
-ALT_RIGHT = KC.MACRO(
+ALT_R = KC.MACRO(
     Tap(KC.RALT(KC.RIGHT))
 )
-DESKTOP_LEFT = KC.MACRO(
+DKTP_L = KC.MACRO(
     Tap(WIN(KC.RCTRL(KC.LEFT)))
 )
-DESKTOP_RIGHT = KC.MACRO(
+DSKTP_R = KC.MACRO(
     Tap(WIN(KC.RCTRL(KC.RIGHT)))
 )
-DESKTOP_NEW = KC.MACRO(
+DSKTP_N = KC.MACRO(
     Tap(WIN(KC.RCTRL(KC.D)))
 )
 WIN_TAB = KC.MACRO(
     Tap(WIN(KC.TAB))
 )
-OBS_PAUSE = KC.MACRO(
+OBS_P = KC.MACRO(
     Tap(KC.LSHIFT(KC.LCTL(KC.KP_SLASH)))
 )
 OBS_START = KC.MACRO(
@@ -86,6 +89,11 @@ OBS_END = KC.MACRO(
 WIN_E = KC.MACRO(
     Tap(WIN(KC.E))
 )
+OBS = KC.HT(
+    OBS_START, 
+    KC.F21, 
+    tap_time=500
+)
 
 ENC2 = KC.TD(
     xxxxxxx,
@@ -93,20 +101,20 @@ ENC2 = KC.TD(
 )
 
 PICO.keymap = [
+    # Main Layer
     [
-        WIN_E, KC.F14, KC.F15, KC.F16, KC.MPRV, KC.MPLY, KC.MNXT, ENC2,
-        KC.F17, KC.F18, KC.F19, KC.F20, ALT_F4, TSKMGR, KC.F13, KC.MUTE,
-        SS, ALT_TAB, WIN_D, WIN_TAB, DESKTOP_LEFT, DESKTOP_RIGHT, DESKTOP_NEW, xxxxxxx,     
-        WIN_L, OBS_START, OBS_PAUSE, OBS_END, ALT_LEFT, ALT_UP, ALT_RIGHT, xxxxxxx,
+        WIN_E   ,   KC.F14  ,   KC.F15  ,   KC.F16  ,   KC.MPRV ,   KC.MPLY ,   KC.MNXT ,   ENC2,
+        KC.F17  ,   KC.F18  ,   KC.F19  ,   KC.F20  ,   ALT_F4  ,   TSKMGR  ,   KC.F13  ,   KC.MUTE,
+        SS      ,   ALT_TAB ,   WIN_D   ,   WIN_TAB ,   DKTP_L  ,   DSKTP_R ,   DSKTP_N ,     
+        WIN_L   ,   OBS     ,   OBS_P   ,   OBS_END ,   ALT_L   ,   ALT_U   ,   ALT_R   ,
     ]
 ]
 
 encoder_handler.map = [
-    (
-        [
-            (KC.AUDIO_VOL_DOWN, KC.AUDIO_VOL_UP,),
-            (KC.BRIGHTNESS_DOWN, KC.BRIGHTNESS_UP,)
-        ]
+    # Main Layer
+    (    
+        (KC.AUDIO_VOL_DOWN  , KC.AUDIO_VOL_UP,),
+        (KC.BRIGHTNESS_DOWN , KC.BRIGHTNESS_UP,),
     )   
 ]
 
