@@ -103,7 +103,7 @@ OBS = KC.HT(
 ENC2_delay = 4000
 ENC2_layer_hold = KC.MACRO(
     Press(KC.MO(1)),
-    Delay(delay),
+    Delay(ENC2_delay),
     Release(KC.MO(1)),
 )
 
@@ -135,7 +135,7 @@ encoder_handler.map = [
     ),
     # ENC2 Layer
     (    
-        (   _______  ,   _______   ,),
+        (   KC.AUDIO_VOL_DOWN  ,   KC.AUDIO_VOL_UP   ,),
         (   KC.BRIGHTNESS_DOWN ,   KC.BRIGHTNESS_UP  ,),
     ),
 ]
