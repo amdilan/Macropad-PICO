@@ -1,15 +1,19 @@
 print("Starting")
 
 import board # type: ignore
-from kb import KMKKeyboard
-from kmk.modules.encoder import EncoderHandler
+import usb_hid
 
+from kb import KMKKeyboard
 from kmk.keys import KC
+from Kmk.keys import Key
+
 from kmk.extensions.media_keys import MediaKeys
+from kmk.modules.encoder import EncoderHandler
 from kmk.modules.layers import Layers
-from kmk.modules.macros import Macros, Press, Release, Tap
+from kmk.modules.macros import Macros, Press, Release, Tap, Delay
 from kmk.modules.tapdance import TapDance
 from kmk.modules.holdtap import HoldTap
+from kmk.modules.mouse_keys import MouseKeys
 
 PICO = KMKKeyboard()
 encoder_handler = EncoderHandler()
@@ -26,6 +30,7 @@ PICO.modules.append(encoder_handler)
 PICO.modules.append(layers)
 PICO.modules.append(macros)
 PICO.modules.append(holdtap)
+PICO.modules.append(MouseKeys())
 
 encoder_handler.pins = (
     (board.GP2, board.GP3, None, True,), #Encoder 1
@@ -95,10 +100,15 @@ OBS = KC.HT(
     tap_time=500
 )
 
-ENC2 = KC.TD(
-    xxxxxxx,
-    
+ENC2_delay = 4000
+ENC2_layer_hold = KC.MACRO(
+    Press(KC.MO(1)),
+    Delay(delay),
+    Release(KC.MO(1)),
 )
+
+ENC2 = ENC2_layer_hold
+
 
 PICO.keymap = [
     # Main Layer
@@ -107,15 +117,27 @@ PICO.keymap = [
         KC.F17  ,   KC.F18  ,   KC.F19  ,   KC.F20  ,   ALT_F4  ,   TSKMGR  ,   KC.F13  ,   KC.MUTE,
         SS      ,   ALT_TAB ,   WIN_D   ,   WIN_TAB ,   DKTP_L  ,   DSKTP_R ,   DSKTP_N ,     
         WIN_L   ,   OBS     ,   OBS_P   ,   OBS_END ,   ALT_L   ,   ALT_U   ,   ALT_R   ,
+    ],
+    # Main Layer
+    [
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   ENC2     ,
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   _______  ,
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,     
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,
     ]
 ]
 
 encoder_handler.map = [
     # Main Layer
     (    
-        (KC.AUDIO_VOL_DOWN  , KC.AUDIO_VOL_UP,),
-        (KC.BRIGHTNESS_DOWN , KC.BRIGHTNESS_UP,),
-    )   
+        (   KC.AUDIO_VOL_DOWN  ,   KC.AUDIO_VOL_UP   ,),
+        (   KC.MW_DOWN ,   KC.MW_UP  ,),
+    ),
+    # ENC2 Layer
+    (    
+        (   _______  ,   _______   ,),
+        (   KC.BRIGHTNESS_DOWN ,   KC.BRIGHTNESS_UP  ,),
+    ),
 ]
 
 
