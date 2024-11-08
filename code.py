@@ -118,7 +118,7 @@ PICO.keymap = [
         SS      ,   ALT_TAB ,   WIN_D   ,   WIN_TAB ,   DKTP_L  ,   DSKTP_R ,   DSKTP_N ,     
         WIN_L   ,   OBS     ,   OBS_P   ,   OBS_END ,   ALT_L   ,   ALT_U   ,   ALT_R   ,
     ],
-    # Main Layer
+    # ENC2 Layer
     [
         _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   ENC2     ,
         _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   _______  ,
