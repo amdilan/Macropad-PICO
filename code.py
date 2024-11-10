@@ -5,7 +5,6 @@ import usb_hid
 
 from kb import KMKKeyboard
 from kmk.keys import KC
-from Kmk.keys import Key
 
 from kmk.extensions.media_keys import MediaKeys
 from kmk.modules.encoder import EncoderHandler
@@ -100,43 +99,73 @@ OBS = KC.HT(
     tap_time=500
 )
 
-ENC2_delay = 4000
+ENC1_delay = 3000 # 3 seconds
+ENC1_layer_hold = KC.MACRO(
+    Tap(KC.RCTRL(WIN(KC.V))),
+    Press(KC.MO(2)),
+    Delay(ENC1_delay),
+    Tap(KC.ENTER),
+    Tap(KC.ESCAPE),
+    Release(KC.MO(2)),
+    blocking=False,
+)
+
+ENC2_delay = 4000 # 4 sceonds
 ENC2_layer_hold = KC.MACRO(
     Press(KC.MO(1)),
     Delay(ENC2_delay),
     Release(KC.MO(1)),
 )
 
+ENC1 = KC.HT(KC.MUTE, ENC1_layer_hold)
 ENC2 = ENC2_layer_hold
 
 
 PICO.keymap = [
+    # Layer ID: 0
     # Main Layer
     [
-        WIN_E   ,   KC.F14  ,   KC.F15  ,   KC.F16  ,   KC.MPRV ,   KC.MPLY ,   KC.MNXT ,   ENC2,
-        KC.F17  ,   KC.F18  ,   KC.F19  ,   KC.F20  ,   ALT_F4  ,   TSKMGR  ,   KC.F13  ,   KC.MUTE,
-        SS      ,   ALT_TAB ,   WIN_D   ,   WIN_TAB ,   DKTP_L  ,   DSKTP_R ,   DSKTP_N ,     
-        WIN_L   ,   OBS     ,   OBS_P   ,   OBS_END ,   ALT_L   ,   ALT_U   ,   ALT_R   ,
-    ],
+        WIN_E    ,   KC.F14   ,   KC.F15   ,   KC.F16   ,   KC.MPRV  ,   KC.MPLY    ,   KC.MNXT    ,   ENC2     ,
+        KC.F17   ,   KC.F18   ,   KC.F19   ,   KC.F20   ,   ALT_F4   ,   TSKMGR     ,   KC.F13     ,   ENC1     ,
+        SS       ,   ALT_TAB  ,   WIN_D    ,   WIN_TAB  ,   DKTP_L   ,   DSKTP_R    ,   DSKTP_N    ,     
+        WIN_L    ,   OBS      ,   OBS_P    ,   OBS_END  ,   ALT_L    ,   ALT_U      ,   ALT_R      ,
+    ], 
+    # Layer ID: 1
     # ENC2 Layer
     [
         _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   ENC2     ,
-        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   _______  ,
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   ENC1     ,
         _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,     
         _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,
-    ]
+    ],
+    # Layer ID: 2
+    # ENC1 Layer
+    [
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   ENC2     ,
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,   ENC1     ,
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,     
+        _______  ,   _______  ,   _______  ,   _______  ,   _______  ,   _______    ,   _______    ,
+    ],
 ]
 
 encoder_handler.map = [
+    # Layer ID: 0
     # Main Layer
     (    
-        (   KC.AUDIO_VOL_DOWN  ,   KC.AUDIO_VOL_UP   ,),
-        (   KC.MW_DOWN ,   KC.MW_UP  ,),
+        (   KC.AUDIO_VOL_DOWN   ,   KC.AUDIO_VOL_UP ,),
+        (   KC.MW_DOWN          ,   KC.MW_UP        ,),
     ),
+    # Layer ID: 1
     # ENC2 Layer
     (    
         (   KC.AUDIO_VOL_DOWN  ,   KC.AUDIO_VOL_UP   ,),
         (   KC.BRIGHTNESS_DOWN ,   KC.BRIGHTNESS_UP  ,),
+    ),
+    # Layer ID: 2
+    # ENC1 Layer
+    (    
+        (   KC.DOWN             ,   KC.UP             ,),
+        (   KC.BRIGHTNESS_DOWN  ,   KC.BRIGHTNESS_UP  ,),
     ),
 ]
 
