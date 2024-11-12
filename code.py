@@ -122,13 +122,14 @@ ENC1 = KC.HT(KC.MUTE, ENC1_layer_hold)
 ENC2 = ENC2_layer_hold
 
 RC_BIN = KC.HT( KC.LSHIFT(KC.F13), KC.F13 )
+TERMINAL = KC.HT( KC.F19, KC.LSHIFT(KC.F19) )
 
 PICO.keymap = [
     # Layer ID: 0
     # Main Layer
     [
         WIN_E    ,   KC.F14   ,   KC.F15   ,   KC.F16   ,   KC.MPRV  ,   KC.MPLY    ,   KC.MNXT    ,   ENC2     ,
-        KC.F17   ,   KC.F18   ,   KC.F19   ,   KC.F20   ,   ALT_F4   ,   TSKMGR     ,   RC_BIN     ,   ENC1     ,
+        KC.F17   ,   KC.F18   ,   TERMINAL ,   KC.F20   ,   ALT_F4   ,   TSKMGR     ,   RC_BIN     ,   ENC1     ,
         SS       ,   ALT_TAB  ,   WIN_D    ,   WIN_TAB  ,   DKTP_L   ,   DSKTP_R    ,   DSKTP_N    ,     
         WIN_L    ,   OBS      ,   OBS_P    ,   OBS_END  ,   ALT_L    ,   ALT_U      ,   ALT_R      ,
     ], 

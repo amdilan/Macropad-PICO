@@ -31,14 +31,15 @@ F13::{
 		FileRecycleEmpty
 	}
 }
+<+F13::Run "::{645FF040-5081-101B-9F08-00AA002F954E}" ; RecycleBin Folder
 F14::Run "<DIR>\MPC-HC\mpc-hc64.exe"
 F15::Run "<DIR>\Spotify.lnk"
 F16::Run "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
 F17::Run "<DIR>\Everything\Everything.exe"
 F18::Run "notepad.exe"
 F19::Run "<DIR>\AutoHotkey\WinStoreAppLinks\Terminal.lnk"
+<+F19::Run "*RunAs <DIR>\AutoHotkey\WinStoreAppLinks\Terminal.lnk"
 F20::Run "calc.exe"
-<+F13::Run "::{645FF040-5081-101B-9F08-00AA002F954E}" ; RecycleBin Folder
 ;
 ;
 ;#KeyHistory 0
