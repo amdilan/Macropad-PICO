@@ -40,6 +40,7 @@ F18::Run "notepad.exe"
 F19::Run "<DIR>\AutoHotkey\WinStoreAppLinks\Terminal.lnk"
 <+F19::Run "*RunAs <DIR>\AutoHotkey\WinStoreAppLinks\Terminal.lnk"
 F20::Run "calc.exe"
+F21::Run "<DIR>\OBS-Studio\bin\64bit\obs64.exe"
 ;
 ;
 ;#KeyHistory 0
